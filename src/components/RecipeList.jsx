@@ -6,7 +6,8 @@ import './RecipeList.css'
 export default class RecipeList extends Component {
 
     static propTypes = {
-      recipes: PropTypes.arrayOf(Object)
+      recipes: PropTypes.arrayOf(Object),
+        onRecipeDelete: PropTypes.func
     };
 
     static defaultProps = {
@@ -25,7 +26,7 @@ export default class RecipeList extends Component {
             <div className="recipe-list">
                 {
                     this.props.recipes.map((recipe) => (
-                        <Recipe key={recipe.id} {...recipe}
+                        <Recipe key={recipe.id} {...recipe} onDeleteBtnClick={this.props.onRecipeDelete.bind(this, recipe.id)}
                         />
                     ))
                 }

@@ -42,8 +42,10 @@ class App extends Component {
             nextRecipeId: 4,
             showForm: false
         };
+
         this.toggleFormVisibility= this.toggleFormVisibility.bind(this);
         this.addRecipe= this.addRecipe.bind(this);
+        this.deleteRecipe= this.deleteRecipe.bind(this);
 
     }
 
@@ -64,12 +66,27 @@ class App extends Component {
         }))
     }
 
+    deleteRecipe(id) {
+        const recipeToDeleteIndex = this.state.recipes.findIndex( recipe => recipe.id === id);
+
+        this.setState( oldState => {
+            const recipesCopy = oldState.recipes.slice();
+            recipesCopy.splice(recipeToDeleteIndex, 1);
+            return {
+                ...oldState,
+                recipes: recipesCopy, // copy without the element
+                nextRecipeId: oldState.nextRecipeId - 1,
+            }
+
+        });
+    }
+
     render() {
         return (
             <div className="App">
                 <NavBar onNewRecipe={this.toggleFormVisibility}/>
                 <RecipeInput visible={this.state.showForm} onRecipeSave={this.addRecipe}/>
-                <RecipeList recipes={this.state.recipes}/>
+                <RecipeList recipes={this.state.recipes} onRecipeDelete={this.deleteRecipe}/>
             </div>
         );
     }
