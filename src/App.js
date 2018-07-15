@@ -42,7 +42,9 @@ class App extends Component {
             nextRecipeId: 4,
             showForm: false
         };
-        this.toggleFormVisibility= this.toggleFormVisibility.bind(this)
+        this.toggleFormVisibility= this.toggleFormVisibility.bind(this);
+        this.addRecipe= this.addRecipe.bind(this);
+
     }
 
     toggleFormVisibility() {
@@ -54,11 +56,19 @@ class App extends Component {
         })
     }
 
+    addRecipe(recipe) {
+        this.setState( oldState => ({
+            recipes: oldState.recipes.slice().concat(Object.assign({}, recipe, {id: oldState.nextRecipeId})),
+            nextRecipeId: oldState.nextRecipeId + 1,
+            showForm: false,
+        }))
+    }
+
     render() {
         return (
             <div className="App">
                 <NavBar onNewRecipe={this.toggleFormVisibility}/>
-                <RecipeInput visible={this.state.showForm} onRecipeSave={() => console.log('todo implement me')}/>
+                <RecipeInput visible={this.state.showForm} onRecipeSave={this.addRecipe}/>
                 <RecipeList recipes={this.state.recipes}/>
             </div>
         );

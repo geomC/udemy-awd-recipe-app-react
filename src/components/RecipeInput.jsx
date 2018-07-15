@@ -12,8 +12,9 @@ export default class RecipeInput extends Component {
             imgSrc: ''
         };
 
-        this.setStateValueByInputName = this.setStateValueByInputName.bind(this)
-        this.addBlankIngredient = this.addBlankIngredient.bind(this)
+        this.setStateValueByInputName = this.setStateValueByInputName.bind(this);
+        this.addBlankIngredient = this.addBlankIngredient.bind(this);
+        this.onFormSubmit = this.onFormSubmit.bind(this);
     }
 
     /**
@@ -54,6 +55,17 @@ export default class RecipeInput extends Component {
         })
     }
 
+    onFormSubmit(e) {
+        e.preventDefault();
+        this.props.onRecipeSave(this.state);
+        this.setState({
+            title: '',
+            instructions: '',
+            ingredients: [''],
+            imgSrc: ''
+        }) // TODO: DRY. maybe calling setState with undefined and using default props does the job?
+    }
+
     render() {
         const {title, instructions, ingredients, imgSrc} = this.state;
         let ingredientInputs = ingredients.map((ing, i) => (
@@ -82,7 +94,7 @@ export default class RecipeInput extends Component {
 
         return (
             <div className="recipe-form-container" style={formContainerStyle}>
-                <form onSubmit={this.props.onRecipeSave}>
+                <form onSubmit={this.onFormSubmit}>
                     <div className="recipe-form-title-row" style={{display: "flex"}}>
                         <label style={{paddingRight: "8px"}}>Title</label>
                         <input type="text"
@@ -116,6 +128,8 @@ export default class RecipeInput extends Component {
                                style={{flexGrow: 1}}
                                onChange={this.setStateValueByInputName}/>
                     </div>
+
+                    <button type="submit">SAVE</button>
                 </form>
             </div>
         );
