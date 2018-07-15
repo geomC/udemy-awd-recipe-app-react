@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import RecipeList from './components/RecipeList';
 import NavBar from "./components/NavBar";
+import RecipeInput from './components/RecipeInput'
 
 const recipeData = [
     {
@@ -38,15 +39,26 @@ class App extends Component {
         super(props);
         this.state = {
             recipes: recipeData,
-            nextRecipeId: 3
+            nextRecipeId: 4,
+            showForm: false
         };
+        this.toggleFormVisibility= this.toggleFormVisibility.bind(this)
+    }
 
+    toggleFormVisibility() {
+        this.setState( (oldState) => {
+            return {
+                ...this.state,
+                showForm: !oldState.showForm
+            }
+        })
     }
 
     render() {
         return (
             <div className="App">
-                <NavBar/>
+                <NavBar onNewRecipe={this.toggleFormVisibility}/>
+                <RecipeInput visible={this.state.showForm} onRecipeSave={() => console.log('todo implement me')}/>
                 <RecipeList recipes={this.state.recipes}/>
             </div>
         );

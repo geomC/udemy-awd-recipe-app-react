@@ -5,8 +5,6 @@ export default class NavBar extends Component {
 
     render() {
 
-
-
         return <header className="appHeader">
             <header>
                 <h2><a>Recipe App</a></h2>
