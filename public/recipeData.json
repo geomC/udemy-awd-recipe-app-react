@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Spaghetti Bolognese",
+    "imgSrc": "spaghetti.jpg",
+    "ingredients": [
+      "carrots, minced beef, salary, tomatoes"
+    ],
+    "instructions": "boil water, cook noodles, cook sauce, enjoy",
+  },
+  {
+    "title": "Milkshake",
+    "ingredients": [
+      "milk, ice, fruit"
+    ],
+    "instructions": "mix it baby",
+    "imgSrc": "https://upload.wikimedia.org/wikipedia/commons/7/72/Strawberry_milkshake.jpg"
+  },
+  {
+    "title": "Avocado Toast",
+    "ingredients": [
+      "avo, toast"
+    ],
+    "instructions": "put the avo on the toast",
+    "imgSrc": "http://ibakeheshoots.com/wp-content/uploads/2014/08/avocado-1.jpg"
+  }
+]
